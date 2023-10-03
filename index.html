@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <h1 style="text-align: center;">Country Data</h1>
+    <div class="card mb-3" style="max-width: 375px; float: left;" >
+      <label class="form-label" style="text-align: center;">Select a country to see its data:</label>
+      <input type="search" id="datalist" placeholder="search Country"></input>
+      <ul id="list" type="Select">
+        <li></li>
+      </ul>
+    </div> 
+    <br>
+    <div class="card mb-3" style="max-width: 375px; border-radius: 5px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); display: inline-block; vertical-align: top;" >
+      <div class="card-body">
+        <img id="img" src="https://www.fon.bg.ac.rs/eng/downloads/sites/2/2018/03/Fon-cover-1024x483.jpg" class="img-fluid rounded-start" alt="..." width="375" height="150">
+        <h4 class="card-countri" style="text-align: center;" id="country">Country: </h4>
+        <img id="flag" width="35" height="20" style="margin-left: 10%; box-shadow: 0 1px 8px 4px rgba(0,0,0,0.2);">
+        <div style="margin-left: 10%;">
+          <p class="card-capital" id="capital">Capital: </p>
+          <p class="card-language" id="language">Language: </p>
+        </div>
+        <div style="margin-left: 10%;">
+          <p class="card-population" id="population">Population: </p>
+          <p class="card-moned" id="moned">Moned: </p>
+        </div>
+      </div>
+    <script >
+      let dataList = document.getElementById("datalist");
+      let countries = [];
+      let countrySelected;
+
+      // send the GET request to API and create an array with the names of the countries
+      fetch("https://restcountries.com/v3.1/all") 
+        .then(res => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            throw new Error("Something went wrong");
+          }
+        })
+        .then(data => {
+          for (let country of data) {
+            countries.push(country.name.common);
+          }
+          countries.sort();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+
+      //create an event for typing and searching for the country
+      dataList.addEventListener("keyup", function() {
+        let value = this.value;
+        let li;
+        document.getElementById("list").innerHTML = "";
+        for (let country of countries) {
+          if (country.toLowerCase().includes(value.toLowerCase())) {
+            li = document.createElement("li");
+            li.textContent = country;
+            document.getElementById("list").appendChild(li);
+          }
+        }
+      });   
+      list.onclick = function(event) {
+        let target = event.target;
+        if (target.tagName === "LI") {
+          countrySelected = target.textContent;
+          document.getElementById('list').innerHTML = countrySelected;
+          searshDateCountry();
+        }
+      };
+
+      // send the GET request to the API of the selected country and display the data in the html page
+      function searshDateCountry(){
+        fetch("https://restcountries.com/v3.1/name/" + countrySelected) 
+        .then (res => { 
+          if (res.ok) { 
+            return res.json(); 
+          } else {
+            throw new Error("Something went wrong"); 
+          }
+        })
+        .then (data => { 
+          let img = document.querySelector("#flag");
+          img.setAttribute("src", data[0].flags.png);
+          document.getElementById("country").textContent = "Country: " + countrySelected; 
+          document.getElementById("capital").textContent = "Capital: " + data [0].capital; 
+          document.getElementById("language").textContent = "Language: " + Object.values(data[0].languages);
+          document.getElementById("population").textContent = "Population: " + data [0].population; 
+          document.getElementById("moned").textContent = "Moned: " + Object.keys(data[0].currencies); 
+        })
+        .catch (err => { 
+          console.error (err); 
+        });
+      } 
+    </script>
+  </body>
+</html>

@@ -8,13 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
 
         .card-container {
             text-align: center;
@@ -29,33 +22,33 @@
 </head>
 
 <body>
-<div>
+<div class="card-container">
     <h1 style="text-align: center;">Country Data</h1>
+
     <div class="card mb-3" style="max-width: 375px; float: left;">
         <label class="form-label" style="text-align: center;">Select a country to see its data:</label>
         <input type="search" id="datalist" placeholder="Search Country">
         <ul id="list"></ul>
     </div>
-</div>
-<br>
-<div class="card mb-3"
-     style="max-width: 375px; border-radius: 5px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); display: inline-block; vertical-align: top;">
-    <div class="card-body">
-        <img id="flagImage" src="https://www.fon.bg.ac.rs/eng/downloads/sites/2/2018/03/Fon-cover-1024x483.jpg"
-             class="img-fluid rounded-start" alt="Flag" width="375" height="150">
-        <h4 class="card-countri" style="text-align: center;" id="country">Country: </h4>
-        <img id="currencyImage" width="35" height="20"
-             style="margin-left: 10%; box-shadow: 0 1px 8px 4px rgba(0,0,0,0.2);">
-        <div style="margin-left: 10%;">
-            <p class="card-capital" id="capital">Capital: </p>
-            <p class="card-language" id="language">Language: </p>
-        </div>
-        <div style="margin-left: 10%;">
-            <p class="card-population" id="population">Population: </p>
-            <p class="card-currency" id="currency">Currency: </p>
+
+    <div class="card mb-3"
+         style="max-width: 375px; border-radius: 5px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); display: inline-block; vertical-align: top;">
+        <div class="card-body">
+            <img id="flagImage" src="https://www.fon.bg.ac.rs/eng/downloads/sites/2/2018/03/Fon-cover-1024x483.jpg"
+                 class="img-fluid rounded-start" alt="Flag" width="375" height="150">
+            <h4 class="card-countri" style="text-align: center;" id="country">Country: </h4>
+            <div style="margin-left: 10%;">
+                <p class="card-capital" id="capital">Capital: </p>
+                <p class="card-language" id="language">Language: </p>
+            </div>
+            <div style="margin-left: 10%;">
+                <p class="card-population" id="population">Population: </p>
+                <p class="card-currency" id="currency">Currency: </p>
+            </div>
         </div>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
